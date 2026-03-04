@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 33% 98%;
+    --foreground: 224 71% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 224 71% 4%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --accent: 262 83% 58%;
+    --accent-foreground: 224 71% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262 83% 58%;
+
+    --radius: 1rem;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --glow: 262 83% 58%;
+    --glow-secondary: 290 83% 58%;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 210 20% 98%;
+
+    --card: 224 71% 4%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 263 70% 50%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 263 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+    @apply tracking-tight font-bold;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-white/20 dark:border-white/10;
+  }
+
+  .glass-card {
+    @apply bg-white/40 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-pink-500;
+  }
+
+  .bg-mesh {
+    background-image:
+      radial-gradient(at 0% 0%, hsla(262, 83%, 58%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(290, 83%, 58%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(262, 83%, 58%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(290, 83%, 58%, 0.1) 0px, transparent 50%);
+  }
+
+  .premium-shadow {
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.1);
+  }
+
+  .premium-shadow-hover {
+    @apply transition-all duration-300;
+  }
+
+  .premium-shadow-hover:hover {
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .animate-slow-fade {
+    animation: fade-in 1.5s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .glow-border {
+    position: relative;
+    z-index: 0;
+  }
+
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--glow-secondary)));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glow-border:hover::before {
+    opacity: 1;
+  }
+
+  .btn-premium {
+    @apply h-14 rounded-2xl bg-primary text-white font-black shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all active:scale-95 flex items-center justify-center gap-3 px-8;
+  }
+
+  .glass-input {
+    @apply h-14 rounded-2xl bg-secondary/50 border-0 focus:ring-2 focus:ring-primary/20 transition-all font-medium px-6;
+  }
+
+  .card-premium {
+    @apply glass-card rounded-[32px] p-8 border-primary/5 shadow-2xl shadow-primary/5 hover:border-primary/20 hover:shadow-primary/10 transition-all;
+  }
+}
+
+.course-card-inner {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.course-card-hover:hover .course-card-inner {
+  transform: scale(1.02);
+}
+
+.nav-link-active {
+  @apply text-primary font-semibold;
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: '';
+  @apply absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full;
+}
